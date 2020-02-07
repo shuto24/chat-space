@@ -1,0 +1,48 @@
+.main-chat
+  .main-caht__group-info
+    .main-caht__group-info__group 
+      %h1.main-caht__group-info__group__name
+        test
+      %p.main-caht__group-info__group__member
+        Member : name
+    .main-chat__group-info__comment-sub 
+    = link_to "#", class: "content-btn" do
+      Edit
+  .main-chat__message-list
+    .main-chat__message-list__data
+      .main-chat__message-list__data__pieces
+        %p.main-chat__message-list__data__pieces__nam
+          masa 
+        %p.main-chat__message-list__data__pieces__time
+          2019/11/20(wed) 17:43:01
+      .main-chat__message-list__data__comment
+        おはよう
+
+        .main-chat__message-list__data
+      .main-chat__message-list__data__pieces
+        %p.main-chat__message-list__data__pieces__nam
+          masa 
+        %p.main-chat__message-list__data__pieces__time
+          2019/11/20(wed) 17:43:01
+      .main-chat__message-list__data__comment
+        おはよう
+
+        .main-chat__message-list__data
+      .main-chat__message-list__data__pieces
+        %p.main-chat__message-list__data__pieces__nam
+          masa 
+        %p.main-chat__message-list__data__pieces__time
+          2019/11/20(wed) 17:43:01
+      .main-chat__message-list__data__comment
+        おはよう
+
+  .main-chat__message-form
+    .main-chat__message-form__comment
+      %div.main-chat__message-form__comment-text
+        type a message
+      %label{class: "main-chat__message-form__comment-icon"}
+        = icon('fas', 'image')
+        %input{type: "file"}
+    .main-chat__message-form__submit
+    = link_to "#", class: "submit-btn" do
+      Send
