@@ -1,0 +1,49 @@
+.main-chat
+  .message-info
+    .group
+      %h1.group__name
+        test
+      %p.group__member
+        Member : name
+    .sub-btn
+      = link_to "#" do
+        Edit
+
+  .messages-list
+    .message
+      .message-data
+        %p.message-data__name
+          masa 
+        %p.message-data__time
+          2019/11/20(wed) 17:43:01
+      .comment
+        おはよう
+
+    .message
+      .message-data
+        %p.message-data__name
+          masa 
+        %p.message-data__time
+          2019/11/20(wed) 17:43:01
+      .comment
+        おはよう
+
+    .message
+      .message-data
+        %p.message-data__name
+          masa 
+        %p.message-data__time
+          2019/11/20(wed) 17:43:01
+      .comment
+        おはよう
+
+  .message-form
+    .form-comment
+      %p.form-comment__text
+        type a message
+      %label{class: "form-comment__icon"}
+        = icon('fas', 'image')
+        %input{type: "file"}
+    .submit-btn
+    = link_to "#" do
+      Send
