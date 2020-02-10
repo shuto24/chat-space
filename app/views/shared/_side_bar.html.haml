@@ -2,12 +2,12 @@
   .side-top
     .user-data
       .user-data__nam
-        masa
+        = current_user.name
       .user-data__icon
         = link_to "#" do
           = icon('fas', 'edit')
-        = link_to "#" do
-          = icon('fas', 'cog')
+        = link_to edit_user_path(current_user) do
+          = icon('fas', 'cog', class: 'icon')
        
   .groups-list
     .user-group
