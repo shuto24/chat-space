@@ -40,16 +40,17 @@
     background-color: #2f3e51;
     padding: 20px 20px 0px;
 
-    .user-group {
+    a {
       font-weight: bold;
       color: #ffffff;
+      text-decoration: none;
 
-      &__name {
+      .user-group__name {
         font-size: 15px;
         padding-bottom: 5px;
       }
 
-      &__message {
+      .user-group__message {
         font-size: 11px;
         padding-bottom: 40px;
       }
