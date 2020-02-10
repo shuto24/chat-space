@@ -4,28 +4,16 @@
       .user-data__nam
         = current_user.name
       .user-data__icon
-        = link_to "#" do
-          = icon('fas', 'edit')
+        = link_to new_group_path do
+          = icon('fas', 'edit', class: 'icon')
         = link_to edit_user_path(current_user) do
           = icon('fas', 'cog', class: 'icon')
        
   .groups-list
-    .user-group
-      .user-group__name
-        teckcamp
-      .user-group__message
-        まだメッセージがありません
-
-    .user-group
-      .suse-group__name
-        teckcamp
-      .user-group__message
-        まだメッセージがありません
-
-    .user-group
-      .suse-group__name
-        teckcamp
-      .user-group__message
-        まだメッセージがありません
-
- 
+    - current_user.groups.each do |group|
+      .user-group
+      = link_to '#' do
+        .user-group__name
+          = group.name
+        .user-group__message
+          まだメッセージがありません
