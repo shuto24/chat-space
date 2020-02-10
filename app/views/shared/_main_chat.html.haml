@@ -1,48 +1,49 @@
 .main-chat
-  .main-caht__group-info
-    .main-caht__group-info__group 
-      %h1.main-caht__group-info__group__name
+  .message-info
+    .group
+      %h1.group__name
         test
-      %p.main-caht__group-info__group__member
+      %p.group__member
         Member : name
-    .main-chat__group-info__comment-sub 
-    = link_to "#", class: "content-btn" do
-      Edit
-  .main-chat__message-list
-    .main-chat__message-list__data
-      .main-chat__message-list__data__pieces
-        %p.main-chat__message-list__data__pieces__nam
+    .sub-btn
+      = link_to "#" do
+        Edit
+
+  .messages-list
+    .message
+      .message-data
+        %p.message-data__name
           masa 
-        %p.main-chat__message-list__data__pieces__time
+        %p.message-data__time
           2019/11/20(wed) 17:43:01
-      .main-chat__message-list__data__comment
+      .comment
         おはよう
 
-        .main-chat__message-list__data
-      .main-chat__message-list__data__pieces
-        %p.main-chat__message-list__data__pieces__nam
+    .message
+      .message-data
+        %p.message-data__name
           masa 
-        %p.main-chat__message-list__data__pieces__time
+        %p.message-data__time
           2019/11/20(wed) 17:43:01
-      .main-chat__message-list__data__comment
+      .comment
         おはよう
 
-        .main-chat__message-list__data
-      .main-chat__message-list__data__pieces
-        %p.main-chat__message-list__data__pieces__nam
+    .message
+      .message-data
+        %p.message-data__name
           masa 
-        %p.main-chat__message-list__data__pieces__time
+        %p.message-data__time
           2019/11/20(wed) 17:43:01
-      .main-chat__message-list__data__comment
+      .comment
         おはよう
 
-  .main-chat__message-form
-    .main-chat__message-form__comment
-      %div.main-chat__message-form__comment-text
+  .message-form
+    .form-comment
+      %p.form-comment__text
         type a message
-      %label{class: "main-chat__message-form__comment-icon"}
+      %label{class: "form-comment__icon"}
         = icon('fas', 'image')
         %input{type: "file"}
-    .main-chat__message-form__submit
-    = link_to "#", class: "submit-btn" do
+    .submit-btn
+    = link_to "#" do
       Send
