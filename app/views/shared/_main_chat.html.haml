@@ -2,48 +2,24 @@
   .message-info
     .group
       %h1.group__name
-        test
+        = @group.name
       %p.group__member
-        Member : name
+        Member : 
+        - @group.users.each do |user|
+          = user.name
     .sub-btn
-      = link_to "#" do
+      = link_to edit_group_path(@group.id) do
         Edit
 
   .messages-list
     .message
-      .message-data
-        %p.message-data__name
-          masa 
-        %p.message-data__time
-          2019/11/20(wed) 17:43:01
-      .comment
-        おはよう
+      = render @messages
 
-    .message
-      .message-data
-        %p.message-data__name
-          masa 
-        %p.message-data__time
-          2019/11/20(wed) 17:43:01
-      .comment
-        おはよう
-
-    .message
-      .message-data
-        %p.message-data__name
-          masa 
-        %p.message-data__time
-          2019/11/20(wed) 17:43:01
-      .comment
-        おはよう
-
-  .message-form
-    .form-comment
-      %p.form-comment__text
-        type a message
-      %label{class: "form-comment__icon"}
-        = icon('fas', 'image')
-        %input{type: "file"}
-    .submit-btn
-    = link_to "#" do
-      Send
+  .form
+    = form_for [@group, @message] do |f|
+      = f.text_field :body, class: 'form__message', placeholder: 'type a message'
+      .form-comment
+        = f.label :image, class: 'form-comment__image' do
+          = icon('fas', 'image', class: 'icon')
+          = f.file_field :image, class: 'hidden'
+      = f.submit 'Send', class: 'form__submit'
