@@ -12,14 +12,14 @@
         Edit
 
   .messages-list
-    .message
-      = render @messages
+    = render @messages
 
   .form
     = form_for [@group, @message] do |f|
-      = f.text_field :body, class: 'form__message', placeholder: 'type a message'
-      .form-comment
-        = f.label :image, class: 'form-comment__image' do
-          = icon('fas', 'image', class: 'icon')
-          = f.file_field :image, class: 'hidden'
-      = f.submit 'Send', class: 'form__submit'
+      .form-main
+        .form-comment
+          = f.text_field :body, class: 'form-comment__text', placeholder: 'type a message'
+          = f.label :image, class: 'form-comment__image' do
+            = icon('fas', 'image', class: 'icon')
+            = f.file_field :image, class: 'hidden'
+        = f.submit 'Send', class: 'form-submit'
