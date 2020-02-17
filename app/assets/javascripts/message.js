@@ -1,72 +1,100 @@
-$(function() {
-  function addUser(user) {
-    let html = `
-      <div class="chat-group-user clearfix">
-        <p class="chat-group-user__name">${user.name}</p>
-        <div class="user-search-add chat-group-user__btn chat-group-user__btn--add" data-user-id="${user.id}" data-user-name="${user.name}">追加</div>
-      </div>
-    `;
-    $("#user-search-result").append(html);
-  }
+$(function(){ 
+  var buildHTML = function(message) {
+    if (message.body && message.image) {
+      var html = `<div class="message" data-message-id=` + message.id + `>` +
+        `<div class="upper-message">` +
+          `<div class="upper-message__user-name">` +
+            message.user_name +
+          `</div>` +
+          `<div class="upper-message__date">` +
+            message.created_at +
+          `</div>` +
+        `</div>` +
+        `<div class="lower-message">` +
+          `<p class="lower-message__content">` +
+            message.body +
+          `</p>` +
+          `<img src="` + message.image + `" class="lower-message__image" >` +
+        `</div>` +
+      `</div>`
+    } else if (message.body) {
+      var html = `<div class="message" data-message-id=` + message.id + `>` +
+        `<div class="upper-message">` +
+          `<div class="upper-message__user-name">` +
+            message.user_name +
+          `</div>` +
+          `<div class="upper-message__date">` +
+            message.created_at +
+          `</div>` +
+        `</div>` +
+        `<div class="lower-message">` +
+          `<p class="lower-message__content">` +
+            message.body +
+          `</p>` +
+        `</div>` +
+      `</div>`
+    } else if (message.image) {
+      var html = `<div class="message" data-message-id=` + message.id + `>` +
+        `<div class="upper-message">` +
+          `<div class="upper-message__user-name">` +
+            message.user_name +
+          `</div>` +
+          `<div class="upper-message__date">` +
+            message.created_at +
+          `</div>` +
+        `</div>` +
+        `<div class="lower-message">` +
+          `<img src="` + message.image + `" class="lower-message__image" >` +
+        `</div>` +
+      `</div>`
+    };
+    return html;
+  };
 
-  function addNoUser() {
-    let html = `
-      <div class="chat-group-user clearfix">
-        <p class="chat-group-user__name">ユーザーが見つかりません</p>
-      </div>
-    `;
-    $("#user-search-result").append(html);
-  }
-  function addDeleteUser(name, id) {
-    let html = `
-    <div class="chat-group-user clearfix" id="${id}">
-      <p class="chat-group-user__name">${name}</p>
-      <div class="user-search-remove chat-group-user__btn chat-group-user__btn--remove js-remove-btn" data-user-id="${id}" data-user-name="${name}">削除</div>
-    </div>`;
-    $(".js-add-user").append(html);
-  }
-  function addMember(userId) {
-    let html = `<input value="${userId}" name="group[user_ids][]" type="hidden" id="group_user_ids_${userId}" />`;
-    $(`#${userId}`).append(html);
-  }
-  $("#user-search-field").on("keyup", function() {
-    let input = $("#user-search-field").val();
-    $.ajax({
-      type: "GET",
-      url: "/users",
-      data: { keyword: input },
-      dataType: "json"
+  $('#new_message').on('submit', function(e){
+  e.preventDefault();
+  var formData = new FormData(this);
+  var url = $(this).attr('action')
+  $.ajax({
+    url: url,
+    type: "POST",
+    data: formData,
+    dataType: 'json',
+    processData: false,
+    contentType: false
+  })
+    .done(function(data){
+      var html = buildHTML(data);
+      $('.form-submit').prop('disabled', false);
+      $('.messages-list').append(html); 
+      $('form')[0].reset();
+      $('.messages-list').animate({ scrollTop: $('.messages-list')[0].scrollHeight});
     })
-      .done(function(users) {
-        $("#user-search-result").empty();
+  })
 
-        if (users.length !== 0) {
-          users.forEach(function(user) {
-            addUser(user);
-          });
-        } else if (input.length == 0) {
-          return false;
-        } else {
-          addNoUser();
-        }
-      })
-      .fail(function() {
-        alert("通信エラーです。ユーザーが表示できません。");
-      });
-  });
-  $(document).on("click", ".chat-group-user__btn--add", function() {
-    console.log
-    const userName = $(this).attr("data-user-name");
-    const userId = $(this).attr("data-user-id");
-    $(this)
-      .parent()
-      .remove();
-    addDeleteUser(userName, userId);
-    addMember(userId);
-  });
-  $(document).on("click", ".chat-group-user__btn--remove", function() {
-    $(this)
-      .parent()
-      .remove();
-  });
+  var reloadMessages = function() {
+    var last_message_id = $('.message:last').data("message-id");
+    $.ajax({
+      url: "api/messages",
+      type: 'get',
+      dataType: 'json',
+      data: {id: last_message_id}
+    })
+    .done(function(messages) {
+      if (messages.length !== 0) {
+        var insertHTML = '';
+        $.each(messages, function(i, message) {
+          insertHTML += buildHTML(message)
+        });
+      $('.messages-list').append(insertHTML);
+      $('.messages-list').animate({ scrollTop: $('.messages-list')[0].scrollHeight});
+      }
+    })
+    .fail(function() {
+      alert("error");
+    });
+  };
+  if (document.location.href.match(/\/groups\/\d+\/messages/)) {
+    setInterval(reloadMessages, 7000);
+  }
 });
