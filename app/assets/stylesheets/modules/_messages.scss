@@ -8,6 +8,7 @@
   height: 100vh;
   float: left;
 
+
   .side-top {
     height: 100px;
     display: flex;
@@ -39,6 +40,7 @@
     height: calc(100% - 100px);
     background-color: #2f3e51;
     padding: 20px 20px 0px;
+    overflow: auto;
 
     a {
       font-weight: bold;
@@ -74,10 +76,12 @@
         padding-top: 35px;
         padding-left: 40px;
 
+
       &__name {
           color: #333333;
           font-size: 20px;
           padding-bottom: 15px;
+          font-weight: normal;
       }
       &__member {
         color: #999999;
@@ -118,6 +122,7 @@
       &__name {
         color: #333333;
         font-size: 16px;
+        font-weight: bold;
       }
 
       &__time {
