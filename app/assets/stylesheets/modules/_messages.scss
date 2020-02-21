@@ -8,7 +8,6 @@
   height: 100vh;
   float: left;
 
-
   .side-top {
     height: 100px;
     display: flex;
@@ -40,7 +39,7 @@
     height: calc(100% - 100px);
     background-color: #2f3e51;
     padding: 20px 20px 0px;
-    overflow: auto;
+    overflow: scroll;
 
     a {
       font-weight: bold;
@@ -76,12 +75,10 @@
         padding-top: 35px;
         padding-left: 40px;
 
-
       &__name {
           color: #333333;
           font-size: 20px;
           padding-bottom: 15px;
-          font-weight: normal;
       }
       &__member {
         color: #999999;
@@ -110,30 +107,35 @@
   .messages-list {
     height: calc(100% - 190px);
     background-color: #fafafa;
-    padding-top: 35px;
-    padding-left: 40px;
-    padding-bottom: 46px;
-    overflow: auto;
+    padding: 46px 40px 0;
+    overflow: scroll;
 
-    .message-data {
-      display: flex;
-      padding-bottom: 12px;
-      
-      &__name {
-        color: #333333;
-        font-size: 16px;
-        font-weight: bold;
-      }
+    .message {
+      .upper-message {
+        display: flex;
+        padding-bottom: 12px;
+        
+        &__user-name {
+          color: #333333;
+          font-size: 16px;
+          font-weight: bold;
+        }
 
-      &__time {
-        color: #999999;
-        font-size: 12px;
-        padding-left: 10px;
+        &__date {
+          color: #999999;
+          font-size: 12px;
+          padding-left: 10px;
+        }
       }
-    }
-    .comment {
-      color: #434a54;
-      font-size: 14px;
+      .lower-message {
+        margin-top: 10px;
+
+        &__content {
+          color: #434a54;
+          font-size: 14px;
+          margin-bottom: 40px;
+        }
+      }
     }
   }
 
